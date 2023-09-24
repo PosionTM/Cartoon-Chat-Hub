@@ -1,4 +1,83 @@
 body {
-    background-color: black;
-    color: whitesmoke;
+    background-color: rgb(43, 41, 40);
+    color: rgb(249, 249, 249);
+    font-family: sans-serif;
+    margin: 0;
+    
+}
+
+
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 2fr 10fr 3fr;
+    grid-template-columns: 2fr 12fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    background-color: rgb(31, 20, 79);
+    height: 100%;
+    grid-row: 1;
+    grid-column: 1 / 3;
+    justify-content: end;
+    align-items: center;
+    text-align: center;
+}
+
+.sub_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90vw;
+    
+}
+
+#main_title {
+    font-size: 3em;
+    
+}
+
+.burger_icon {
+    min-width: 8vw;
+    margin-right: 2vw;
+    font-size: 1.5em;
+    text-align: center;
+    transform: rotate(90deg);
+    
+}
+
+.people_window {
+    display: flex;
+    background-color: rgb(21, 10, 59);
+    grid-row: 2 / 5;
+    height: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.conversation_window {
+    display: flex;
+    background-color: rgb(43, 41, 40);
+    height: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_window {
+    display: flex;
+    background-color: rgb(33, 31, 30);
+    height: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
