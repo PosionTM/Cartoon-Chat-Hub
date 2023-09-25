@@ -2,13 +2,17 @@
 
 ### Description
 ```
-Chatty placeholder!
+A website that allows you to talk to different funny and shady characters alike!
 ```
 ### Built with
 ```
-Pending..
+Frontend:
+  React
+  HTML/CSS/Javascript
+Backend:
+  Node.js & Express
 ```
 ## Images
 ```
-Pending..
+Pending... Project not finished.
 ```
