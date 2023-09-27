@@ -1,14 +1,23 @@
 import React from 'react'
 
-const ConversationWindow = () => {
-    
-    const fetchConversation = () => {
-        console.log('test')
+const ConversationWindow = ({ chatHistory }) => {
+    if (chatHistory == null) {
+        return (
+            <div className='conversation_window'>
+                Conversation Window loading...
+            </div>
+        )
     }
 
+    // Neeed to accept prop from app.js for chat history
     return (
         <div className='conversation_window'>
-            Conversation Window
+            {chatHistory.map((chatHistory) => (
+                <div className='message'>
+                {chatHistory.role}: {chatHistory.content}
+                </div >
+
+            ))}
         </div>
     )
 }

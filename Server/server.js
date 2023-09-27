@@ -2,11 +2,33 @@ import express from 'express'
 import path from 'path'
 import OpenAI from 'openai'
 import dotenv from 'dotenv'
+import cors from 'cors'
 const app = express()
 dotenv.config()
 
+// NEED TO CONFIGURE CORS - ENSURE IT WORKS
+// CONFIGURE GET REQUEST TO http://localhost:5000/api/chat-history
+// For now, we'll work with an expanding array for conversation history with 1 person
+
+const PORT = process.env.PORT || 5000 // start server on assigned port OR port 5000
+
+app.use(cors({ origin: 'http://localhost:3000' }));
+
+app.use(express.json()) // enable handling of raw JSON
+app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
+
+const chatHistory = [
+    {"role": "user", "content": "Who won the world series in 2020?"},
+    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+    {"role": "user", "content": "Where was it played?"},
+]
+
+app.get('/api/chat-history', (req, res) => {
+    res.json(chatHistory)
+})
 
 
+// CHAT GPT API STUFF
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY}) // key required for API requests
 
 let userMsg = 'Whats the main ingredient of pizza?' // message that sends to ChatGPT for testing
@@ -27,10 +49,6 @@ async function main() {
 
 main(); // call function to actually send the API request
 
-const PORT = process.env.PORT || 5000 // start server on assigned port OR port 5000
-
-app.use(express.json()) // enable handling of raw JSON
-app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
 
 // Starting up server
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
