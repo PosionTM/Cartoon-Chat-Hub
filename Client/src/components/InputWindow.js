@@ -15,6 +15,7 @@ const InputWindow = ({ userText, sendUserText }) => {
             userText = userTextArea
             console.log(`User text area from Input Window: ${userText}`)
             sendUserText(userText)
+            textArea.value = ''
         } else {
             console.log('nothing in the text area')
         }

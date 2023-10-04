@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
 const chatHistory = [
     {"role": "user", "content": "Who won the world series in 2020?"},
     {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-    {"role": "user", "content": "Where was it played?"},
 ]
 
 app.get('/api/chat-history', (req, res) => {
@@ -38,12 +37,13 @@ messages.push(['assistant', completionText ]) // save msg from chatGPT
 // now replace content within the API call with the messages variable and it'll act like normal ChatGPT
 */
 // constructing messages based on history
-app.post('/api/chat-history/update', (req, res) => {
-    console.log(`Chat history PRIOR to update in server: ${JSON.stringify(chatHistory)}`)
+app.post('/api/chat-history/update', async (req, res) => {
+    // console.log(`Chat history PRIOR to update in server: ${JSON.stringify(chatHistory)}`) // DEBUG STUFF
     const usermsg = req.body //req test
-    console.log(`\nreq.body log: ${JSON.stringify(req.body)}`)
+    // console.log(`\nreq.body log: ${JSON.stringify(req.body)}`) // DEBUG STUFF
     chatHistory.push(usermsg)
-    console.log(`\nNew chat history with server: ${JSON.stringify(chatHistory)}\n`)
+    await main();
+    // console.log(`\nNew chat history with server: ${JSON.stringify(chatHistory)}\n`) // DEBUG STUFF
     res.json(chatHistory)
 })
 
@@ -55,20 +55,19 @@ let userMsg = 'Whats the main ingredient of pizza?' // message that sends to Cha
 
 // Sending chat to chatGPT and console logging result
 // COMMENTING OUT THIS TO SAVE ON TOKENS FOR NOW
-// async function main() {
-//     const chatCompletion = await openai.chat.completions.create({
-//         model: 'gpt-3.5-turbo',
-//         messages: [
-//             {
-//                 role: 'user', content: userMsg
-//             }
-//         ]
-//     })
+async function main() {
+    const chatCompletion = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        messages: chatHistory
+    })
 
-//     console.log(chatCompletion.choices[0].message.content)
-// }
 
-// main(); // call function to actually send the API request
+    console.log(chatCompletion.choices[0].message) // DEBUG PURPOSES
+    chatHistory.push(chatCompletion.choices[0].message)
+
+}
+
+ // call function to actually send the API request
 
 
 // Starting up server

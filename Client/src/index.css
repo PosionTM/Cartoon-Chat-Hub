@@ -5,13 +5,19 @@
     --mainSecondaryColor2: rgb(21, 10, 59); /* darker Blue - panel color */
     --textColor1: rgb(249, 249, 249); /* White - color of most text */
     --textColor2: rgb(181, 184, 189); /* Gray - color of chatGPT text*/
+    
 }
+
+
 
 body {
     background-color: var(--mainThemeColor1);
     color: var(--textColor1);
     font-family: sans-serif;
     margin: 0;
+    overflow: auto;
+    
+    
 }
 
 
@@ -23,6 +29,25 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: auto;
+    
+}
+
+div::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+div::-webkit-scrollbar {
+    width: 15px;
+    background-color: var(--textColor1);
+}
+
+div::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: var(--mainSecondaryColor1);
 }
 
 .header {
@@ -80,44 +105,65 @@ body {
     text-align: center;
     justify-content: center;
     align-items: center;
+    
 }
 
+
+
 .chatWindow {
-    display: flex;
-    flex-direction: column;
     background-color: var(--mainThemeColor1);
     height: 100%;
+    max-height: 100%;
     width: 70%;
     font-size: 1.5em;
-    justify-content:end;
+    justify-content: flex-end;
+    
 }
 
 .conversationSpace {
     display: flex;
     height: 100%;
+    max-height: 100%;
     justify-content: center;
     align-items: center;
+    align-self: flex-end;
+    overflow-y: auto;
+
 }
 
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+     /* This breaks the scroll bar -- fix later!*/
+    /* justify-content: flex-end; */
+    height: 100%;
+}
 
 .assistantMessage {
     color: var(--textColor2);
     margin-bottom: 4%;
     text-align: end;
-    align-self: flex-start;
+    align-self: flex-end;
+    justify-content: end;
 }
 
 .userMessage {
     color: var(--textColor1);
     margin-bottom: 4%;
     align-self: flex-end;
+    text-align: start;
+    width: 100%;
     
 }
+
 
 #userText {
     background-color: var(--mainThemeColor1);
     color: var(--textColor1);
     font-size: 0.8em;
+    
+    
 
 }
 
@@ -140,4 +186,5 @@ body {
 .sendButton:active {
     transition: 0.3s;
     filter: brightness(120%);
+    
 }

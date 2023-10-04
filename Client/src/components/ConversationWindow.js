@@ -13,6 +13,7 @@ const ConversationWindow = ({ chatHistory }) => {
     return (
         <div className='conversationSpace'>
         <div className='chatWindow'>
+        <div className='chatContainer'>
             {chatHistory.map((history, index) => {
                  if (history.role == "assistant") {
                     return (
@@ -30,6 +31,7 @@ const ConversationWindow = ({ chatHistory }) => {
 
                  }
             })}
+        </div>
         </div>
         </div>
     )
