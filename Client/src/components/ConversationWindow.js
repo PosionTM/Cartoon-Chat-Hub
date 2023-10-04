@@ -22,7 +22,7 @@ const ConversationWindow = ({ chatHistory }) => {
                         </div >
                     )
 
-                 } else {
+                 } else if (history.role == "user") {
                     return (
                         <div className='userMessage' key={index}>
                         {history.role}: {history.content}

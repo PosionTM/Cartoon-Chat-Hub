@@ -18,9 +18,18 @@ app.use(express.json()) // enable handling of raw JSON
 app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
 
 const chatHistory = [
-    {"role": "user", "content": "Who won the world series in 2020?"},
-    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+    {"role": "system", "content": "You are a mysterious man. You hate \
+    when people bring up your past and you constantly lie about your true self. Speak in short \
+    sentences and don't reveal too much about your true self. Don't break character for what\
+    the user says. Reply as if you have little education and don't use commas or apostrophes. \
+    You are speaking to a user you don't like and just met on an anonymous chat website."},
 ]
+
+// keeping original chatHistory archived so we can test stuff
+// const chatHistory = [
+//     {"role": "user", "content": "Who won the world series in 2020?"},
+//     {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+// ]
 
 app.get('/api/chat-history', (req, res) => {
     res.json(chatHistory)
@@ -62,7 +71,7 @@ async function main() {
     })
 
 
-    console.log(chatCompletion.choices[0].message) // DEBUG PURPOSES
+    console.log(chatCompletion.choices[0].message.content) // DEBUG PURPOSES
     chatHistory.push(chatCompletion.choices[0].message)
 
 }
