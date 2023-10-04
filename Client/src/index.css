@@ -1,6 +1,15 @@
+:root {
+    --mainThemeColor1: rgb(43, 41, 40); /*Black - background color*/
+    --mainThemeColor2: rgb(33, 31, 30); /* Black - Secondary background*/
+    --mainSecondaryColor1: rgb(31, 20, 79); /* dark Blue - Header color*/
+    --mainSecondaryColor2: rgb(21, 10, 59); /* darker Blue - panel color */
+    --textColor1: rgb(249, 249, 249); /* White - color of most text */
+    --textColor2: rgb(181, 184, 189); /* Gray - color of chatGPT text*/
+}
+
 body {
-    background-color: rgb(43, 41, 40);
-    color: rgb(249, 249, 249);
+    background-color: var(--mainThemeColor1);
+    color: var(--textColor1);
     font-family: sans-serif;
     margin: 0;
 }
@@ -18,7 +27,7 @@ body {
 
 .header {
     display: flex;
-    background-color: rgb(31, 20, 79);
+    background-color: var(--mainSecondaryColor1);
     height: 100%;
     grid-row: 1;
     grid-column: 1 / 3;
@@ -52,7 +61,7 @@ body {
 
 .people_window {
     display: flex;
-    background-color: rgb(21, 10, 59);
+    background-color: var(--mainSecondaryColor2);
     grid-row: 2 / 5;
     height: 100%;
     font-size: 1.5em;
@@ -65,7 +74,7 @@ body {
 
 .input_window {
     display: flex;
-    background-color: rgb(33, 31, 30);
+    background-color: var(--mainThemeColor2);
     height: 100%;
     font-size: 1.5em;
     text-align: center;
@@ -76,7 +85,7 @@ body {
 .chatWindow {
     display: flex;
     flex-direction: column;
-    background-color: rgb(43, 41, 40);
+    background-color: var(--mainThemeColor1);
     height: 100%;
     width: 70%;
     font-size: 1.5em;
@@ -92,15 +101,43 @@ body {
 
 
 .assistantMessage {
-    color: rgb(181, 184, 189);
+    color: var(--textColor2);
     margin-bottom: 4%;
     text-align: end;
     align-self: flex-start;
 }
 
 .userMessage {
-    color: white;
+    color: var(--textColor1);
     margin-bottom: 4%;
     align-self: flex-end;
     
+}
+
+#userText {
+    background-color: var(--mainThemeColor1);
+    color: var(--textColor1);
+    font-size: 0.8em;
+
+}
+
+.sendButton {
+    background-color: var(--mainSecondaryColor1);
+    color: var(--textColor1);
+    margin-left: 3vw;
+    font-size: 1em;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+}
+
+.sendButton:hover {
+    transition: 0.3s;
+    background-color: var(--mainSecondaryColor2);
+
+}
+
+.sendButton:active {
+    transition: 0.3s;
+    filter: brightness(120%);
 }
