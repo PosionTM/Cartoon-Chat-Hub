@@ -86,13 +86,31 @@ div::-webkit-scrollbar-thumb {
 
 .people_window {
     display: flex;
+    flex-direction: column;
     background-color: var(--mainSecondaryColor2);
     grid-row: 2 / 5;
     height: 100%;
     font-size: 1.5em;
     text-align: center;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    width: 100%;
+    overflow: hidden;
+    
+}
+
+.toon_user_people_window {
+    margin-top: 10px;
+    /* width: fit-content; */
+    align-items: center;
+    justify-content: center;
+
+}
+
+.person_icon {
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
 }
 
 

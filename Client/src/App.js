@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import ConversationWindow from './components/ConversationWindow'
 import InputWindow from './components/InputWindow'
+import PeopleWindow from './components/PeopleWindow'
 
 const App = () => {
 
@@ -71,7 +72,7 @@ const App = () => {
                     <div id='main_title'>Cartoon Chat Hub</div>
                 </div>
             </div>
-            <div className='people_window'> People Window </div>
+            < PeopleWindow />
             < ConversationWindow chatHistory={ chatHistory }/>
             < InputWindow userText={ userText } sendUserText={ sendUserText }/>
         </div>
