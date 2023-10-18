@@ -8,6 +8,7 @@ const InputWindow = ({ userText, sendUserText }) => {
    
     const placeHolderText = 'type your message here'
 
+    // Checks if there's text in text area, otherwise it doesn't send anything if send button is clicked
     const checkValidText = () => {
         const userTextArea = textArea.value
         // If there is text in the text area, if statement will run
@@ -24,7 +25,7 @@ const InputWindow = ({ userText, sendUserText }) => {
         
     }
 
-
+    // Render Input window
     return (
         <div className='input_window'>
             <textarea name="userText" id="userText" cols="80" rows="5" maxLength={250} placeholder={placeHolderText}></textarea>

@@ -1,6 +1,21 @@
 import React from 'react'
+import { useEffect, useRef } from 'react'
 
 const ConversationWindow = ({ chatHistory }) => {
+
+
+    // Scroll down when new message appears
+    const lastMsg = useRef(null)
+    const scrollDown = () => {
+        lastMsg.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollDown()
+    }, [chatHistory])
+
+
+    // Chat rendering
     if (chatHistory == null) {
         return (
             <div className='conversationSpace'>
@@ -8,8 +23,7 @@ const ConversationWindow = ({ chatHistory }) => {
             </div>
         )
     }
-
-    // Neeed to accept prop from app.js for chat history
+    
     return (
         <div className='conversationSpace'>
         <div className='chatWindow'>
@@ -20,7 +34,9 @@ const ConversationWindow = ({ chatHistory }) => {
                         <div className='assistantMessage' key={index}>
                         {history.role}: {history.content}
                         </div >
+                        
                     )
+                    
 
                  } else if (history.role == "user") {
                     return (
@@ -31,6 +47,7 @@ const ConversationWindow = ({ chatHistory }) => {
 
                  }
             })}
+        <div ref={lastMsg} />
         </div>
         </div>
         </div>

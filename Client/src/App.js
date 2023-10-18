@@ -5,10 +5,9 @@ import InputWindow from './components/InputWindow'
 
 const App = () => {
 
-    // Chat history fetch, needs to be app level state/api request due to sending 
-    // if user sends a msg, how will this know to change? simplier in app level
+    
     const [chatHistory, setChatHistory] = useState([{}])
-
+    // load chat history from backend server upon page load
     useEffect(() => {
         const getChatHistory = async () =>{
             const serverChatHistory = await fetchChatHistory()
@@ -39,14 +38,15 @@ const App = () => {
     FE: Update chat history with the response from the server 
     */
 
-    let userText = ''
+    let userText = '' // Placeholder for user input, used for InputWindow Component
 
+    // Sends user text to backend server, waits for response from chatGPT API
     const sendUserText = async (userTextSubmitted) => {
         let userJsonText = {'role': 'user', 'content': userTextSubmitted}
-        console.log(`userJsonText = ${JSON.stringify(userJsonText)}`)
+        console.log(`userJsonText = ${JSON.stringify(userJsonText)}`) // Log for DEBUGGING
         setChatHistory(chatHistory => [...chatHistory, userJsonText])
-        console.log(`Chat History with user msg added in sendUserText: ${JSON.stringify(chatHistory)}`)
-        // const jsonCharHistory = chatHistory.
+        console.log(`Chat History with user msg added in sendUserText: ${JSON.stringify(chatHistory)}`) // Log for DEBUGGING
+
 
         const response = await fetch('http://localhost:5000/api/chat-history/update', {
             method: 'POST',
@@ -56,24 +56,13 @@ const App = () => {
             body: JSON.stringify(userJsonText)
 
         })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('error with server response')
-        //     }
-        // })
-        // .catch(error => {
-        //     console.log('error: ', error)
-        // })
         const toonResponse = await response.json()
-        console.log(`Toon response: ${JSON.stringify(toonResponse)}`)
+        console.log(`Toon response: ${JSON.stringify(toonResponse)}`) // Log for DEBUGGING
         setChatHistory(toonResponse)
 
     }
 
-
-
-
-
+    // Rendering entire app
     return (
         <div className='container'>
             <div className='header'>
