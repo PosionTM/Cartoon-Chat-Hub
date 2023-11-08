@@ -177,18 +177,23 @@ div::-webkit-scrollbar-thumb {
 }
 
 .assistantMessage {
+    display: flex;
     color: var(--textColor2);
-    margin-bottom: 4%;
+    margin: 2% 0 1% 0;
     text-align: end;
     align-self: flex-end;
     justify-content: end;
+    align-items: end;
 }
 
 .userMessage {
+    display: flex;
     color: var(--textColor1);
-    margin-bottom: 4%;
+    margin: 2% 0 1% 0;
     align-self: flex-end;
-    text-align: start;
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
     width: 100%;
     
 }
@@ -198,6 +203,7 @@ div::-webkit-scrollbar-thumb {
     background-color: var(--mainThemeColor1);
     color: var(--textColor1);
     font-size: 0.8em;
+    
     
     
 

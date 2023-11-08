@@ -32,7 +32,8 @@ const ConversationWindow = ({ chatHistory }) => {
                  if (history.role == "assistant") {
                     return (
                         <div className='assistantMessage' key={index}>
-                        {history.role}: {history.content}
+                        {history.content} 
+                        <img src="/images/hooded_figure_art.png" alt="user iocn" className="person_icon"/> 
                         </div >
                         
                     )
@@ -41,7 +42,8 @@ const ConversationWindow = ({ chatHistory }) => {
                  } else if (history.role == "user") {
                     return (
                         <div className='userMessage' key={index}>
-                        {history.role}: {history.content}
+                        <img src="/images/default_user.png" alt="user iocn" className="person_icon"/> 
+                        {history.content}
                         </div >
                     )
 
