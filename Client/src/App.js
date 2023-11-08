@@ -63,6 +63,15 @@ const App = () => {
 
     }
 
+    // People Window Code
+    const [selectedToon, setSeletedToon] = useState(30)
+    
+    const selectToon = (toon_id) => {
+        console.log("clicked a div in ppl window!") // Log for DEBUGGING
+        setSeletedToon(toon_id)
+    }
+
+
     // Rendering entire app
     return (
         <div className='container'>
@@ -72,7 +81,7 @@ const App = () => {
                     <div id='main_title'>Cartoon Chat Hub</div>
                 </div>
             </div>
-            < PeopleWindow />
+            < PeopleWindow selectToon={ selectToon } selectedToon={ selectedToon }/>
             < ConversationWindow chatHistory={ chatHistory }/>
             < InputWindow userText={ userText } sendUserText={ sendUserText }/>
         </div>

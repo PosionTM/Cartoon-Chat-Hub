@@ -104,13 +104,31 @@ div::-webkit-scrollbar-thumb {
     /* width: fit-content; */
     align-items: center;
     justify-content: center;
+    width: 100%;
 
+}
+
+.toon_user_panel {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+    min-height: 6vh;
+    margin-bottom: 1vh;
+    justify-content: start;
+    
+}
+
+.toon_user_panel:hover {
+    background-color: var(--mainSecondaryColor1) !important;
 }
 
 .person_icon {
     height: 1.5em;
     width: 1.5em;
     border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 1vw;
 }
 
 
