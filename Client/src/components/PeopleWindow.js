@@ -16,7 +16,6 @@ const PeopleWindow = ({selectToon, selectedToon}) => {
     //    the current selected toon, will call select toon with the toon_id
     // highlightSelectedToon will just change the color panel of a particular selected toon
         const changeSelectedToon = (event) => {
-            console.log("Changing selected toon") // LOG FOR DEBUGGING
             const clickedToon = event.target
             dehighlightSelectedToon() // returns old selected toon to original color
             highlightSelectedToon(clickedToon.id) // highlights newly selected toon
@@ -45,7 +44,7 @@ const PeopleWindow = ({selectToon, selectedToon}) => {
                     Spongebob
                 </div>
                 <div className='toon_user_panel' onClick={changeSelectedToon} id='20'>
-                    <img src="/images/eeyore_portrait2.png" alt="hooded_figure" className="person_icon"/> 
+                    <img src="/images/eeyore_portrait2.png" alt="eeyore_picture" className="person_icon"/> 
                     Eeyore
                 </div>
                 <div className='toon_user_panel' onClick={changeSelectedToon} id='30'>

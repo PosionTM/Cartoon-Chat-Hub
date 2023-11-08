@@ -27,16 +27,47 @@ app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
 // ]
 
 // Testing and Debugging chat and conversation messages
-const chatHistory = [
+const chatHistoryNoName = [
     {"role": "user", "content": "Who won the world series in 2020?"},
     {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
     {"role": "user", "content": "Who won the world series in 2020?"},
     {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
 ]
 
-app.get('/api/chat-history', (req, res) => {
-    res.json(chatHistory)
+const chatHistorySpongebob = [
+    {"role": "user", "content": "Hey, who are you?"},
+    {"role": "assistant", "content": "Spongebob Laywerpants!"},
+    {"role": "user", "content": "Really? Who's your best friend then?"},
+    {"role": "assistant", "content": "Ahoy! Well that's an easy one captain! It's Patrick Star!"},
+]
+
+const chatHistoryEeyore = [
+    {"role": "user", "content": "Where does the name Eeyore come from?"},
+    {"role": "assistant", "content": "My mother, but it sounds like she didn't try"},
+    {"role": "user", "content": "Wow that sounds mean!"},
+    {"role": "assistant", "content": "I'm sorry, I'm a little sad today. I'm hoping to be happier."},
+]
+
+
+
+app.get('/api/chat-history/noname-chat', (req, res) => {
+    res.json(chatHistoryNoName)
+    console.log('fetched noname chat')
 })
+
+app.get('/api/chat-history/spongebob-chat', (req, res) => {
+    res.json(chatHistorySpongebob)
+    console.log('fetched spongebob chat')
+})
+
+app.get('/api/chat-history/eeyore-chat', (req, res) => {
+    res.json(chatHistoryEeyore)
+    console.log('fetched eeyore chat')
+})
+
+
+
+
 
 /* Idea of storing history
 userInput = "Whatever the user enters from the front-end"
@@ -49,14 +80,28 @@ messages.push(['assistant', completionText ]) // save msg from chatGPT
 // now replace content within the API call with the messages variable and it'll act like normal ChatGPT
 */
 // constructing messages based on history
-app.post('/api/chat-history/update', async (req, res) => {
+app.post('/api/chat-history/update/noname-chat', async (req, res) => {
     // console.log(`Chat history PRIOR to update in server: ${JSON.stringify(chatHistory)}`) // DEBUG STUFF
     const usermsg = req.body //req test
     // console.log(`\nreq.body log: ${JSON.stringify(req.body)}`) // DEBUG STUFF
-    chatHistory.push(usermsg)
-    await main();
+    chatHistoryNoName.push(usermsg)
+    await generateChatResponse(chatHistoryNoName)
     // console.log(`\nNew chat history with server: ${JSON.stringify(chatHistory)}\n`) // DEBUG STUFF
-    res.json(chatHistory)
+    res.json(chatHistoryNoName)
+})
+
+app.post('/api/chat-history/update/spongebob-chat', async (req, res) => {
+    const usermsg = req.body
+    chatHistorySpongebob.push(usermsg)
+    await generateChatResponse(chatHistorySpongebob)
+    res.json(chatHistorySpongebob)
+})
+
+app.post('/api/chat-history/update/eeyore-chat', async (req, res) => {
+    const usermsg = req.body
+    chatHistoryEeyore.push(usermsg)
+    await generateChatResponse(chatHistoryEeyore)
+    res.json(chatHistoryEeyore)
 })
 
 
@@ -67,15 +112,15 @@ let userMsg = 'Whats the main ingredient of pizza?' // message that sends to Cha
 
 // Sending chat to chatGPT and console logging result
 // COMMENTING OUT THIS TO SAVE ON TOKENS FOR NOW
-async function main() {
+async function generateChatResponse(chatConversation) {
     const chatCompletion = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
-        messages: chatHistory
+        messages: chatConversation
     })
 
 
     console.log(chatCompletion.choices[0].message.content) // DEBUG PURPOSES
-    chatHistory.push(chatCompletion.choices[0].message)
+    chatConversation.push(chatCompletion.choices[0].message)
 
 }
 

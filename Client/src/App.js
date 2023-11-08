@@ -10,17 +10,32 @@ const App = () => {
     const [chatHistory, setChatHistory] = useState([{}])
     // load chat history from backend server upon page load
     useEffect(() => {
-        const getChatHistory = async () =>{
-            const serverChatHistory = await fetchChatHistory()
-            setChatHistory(serverChatHistory)
-            console.log(`Successfully fetched data from useEffect: ${chatHistory}`)
-        }
         getChatHistory()
     }, [])
 
+    const getChatHistory = async () =>{
+        const serverChatHistory = await fetchChatHistory()
+        setChatHistory(serverChatHistory)
+        console.log(`Successfully fetched data from useEffect: ${chatHistory}`)
+    }
+
     // Retrieves chat history from server
     const fetchChatHistory = async () => {
-        const response = await fetch('http://localhost:5000/api/chat-history')
+        let chatAddress;
+        console.log(selectedToon)
+        switch(selectedToon) {
+            case 10: 
+                chatAddress = 'http://localhost:5000/api/chat-history/spongebob-chat'
+                break
+            case 20: 
+                chatAddress = 'http://localhost:5000/api/chat-history/eeyore-chat'
+                break
+            case 30: 
+                chatAddress = 'http://localhost:5000/api/chat-history/noname-chat'
+                break
+                
+        }
+        const response = await fetch(chatAddress)
         const data = await response.json()
         console.log("Successfully retrieved fetch data: ", data) // Logging for testing purposes
         return data
@@ -48,8 +63,21 @@ const App = () => {
         setChatHistory(chatHistory => [...chatHistory, userJsonText])
         console.log(`Chat History with user msg added in sendUserText: ${JSON.stringify(chatHistory)}`) // Log for DEBUGGING
 
+        let updateAddress;
+        switch(selectedToon) {
+            case 10: 
+                updateAddress = 'http://localhost:5000/api/chat-history/update/spongebob-chat'
+                break
+            case 20: 
+                updateAddress = 'http://localhost:5000/api/chat-history/update/eeyore-chat'
+                break
+            case 30: 
+                updateAddress = 'http://localhost:5000/api/chat-history/update/noname-chat'
+                break
+                
+        }
 
-        const response = await fetch('http://localhost:5000/api/chat-history/update', {
+        const response = await fetch(updateAddress, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +96,10 @@ const App = () => {
     
     const selectToon = (toon_id) => {
         console.log("clicked a div in ppl window!") // Log for DEBUGGING
-        setSeletedToon(toon_id)
+        let toonID = parseInt(toon_id)
+        setSeletedToon(toonID)
+        getChatHistory()
+        
     }
 
 
