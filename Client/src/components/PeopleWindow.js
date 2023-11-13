@@ -40,15 +40,15 @@ const PeopleWindow = ({selectToon, selectedToon}) => {
         <div className='people_window'>
              <div className='toon_user_people_window' >
                 <div className='toon_user_panel' onClick={changeSelectedToon} id='10'>
-                    <img src="/images/spongebob_portrait.png" alt="spongebob_picture" className="person_icon"/> 
+                    <img src="/images/spongebob_portrait.png" alt="spongebob" className="person_icon"/> 
                     Spongebob
                 </div>
                 <div className='toon_user_panel' onClick={changeSelectedToon} id='20'>
-                    <img src="/images/eeyore_portrait2.png" alt="eeyore_picture" className="person_icon"/> 
+                    <img src="/images/eeyore_portrait2.png" alt="eeyore" className="person_icon"/> 
                     Eeyore
                 </div>
                 <div className='toon_user_panel' onClick={changeSelectedToon} id='30'>
-                    <img src="/images/hooded_figure_art.png" alt="hooded_figure_picture" className="person_icon"/> 
+                    <img src="/images/hooded_figure_art.png" alt="hooded_figure" className="person_icon"/> 
                     NoName356 
                 </div>
 

@@ -16,7 +16,7 @@ const App = () => {
     const getChatHistory = async () =>{
         const serverChatHistory = await fetchChatHistory()
         setChatHistory(serverChatHistory)
-        console.log(`Successfully fetched data from useEffect: ${chatHistory}`)
+        console.log(`Successfully fetched data from useEffect: ${chatHistory}`) // Debugging
     }
 
     // Retrieves chat history from server
@@ -86,7 +86,6 @@ const App = () => {
 
         })
         const toonResponse = await response.json()
-        console.log(`Toon response: ${JSON.stringify(toonResponse)}`) // Log for DEBUGGING
         setChatHistory(toonResponse)
 
     }
@@ -113,7 +112,7 @@ const App = () => {
                 </div>
             </div>
             < PeopleWindow selectToon={ selectToon } selectedToon={ selectedToon }/>
-            < ConversationWindow chatHistory={ chatHistory }/>
+            < ConversationWindow chatHistory={ chatHistory } selectedToon={ selectedToon }/>
             < InputWindow userText={ userText } sendUserText={ sendUserText }/>
         </div>
     )

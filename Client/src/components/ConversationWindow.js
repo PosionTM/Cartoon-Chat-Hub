@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 
-const ConversationWindow = ({ chatHistory }) => {
+const ConversationWindow = ({ chatHistory, selectedToon }) => {
 
 
     // Scroll down when new message appears
@@ -13,6 +13,16 @@ const ConversationWindow = ({ chatHistory }) => {
     useEffect(() => {
         scrollDown()
     }, [chatHistory])
+
+    // Selecting toon icon based on selected toon
+    let toonIcon = "/images/hooded_figure_art.png"; // default icon is NoName toon Icon
+
+    if (selectedToon == 10) {toonIcon = "/images/spongebob_portrait.png"}
+    else if (selectedToon == 20) {toonIcon = "/images/eeyore_portrait2.png"}
+    else {toonIcon = "/images/hooded_figure_art.png"} // default icon is NoName toon Icon
+
+    // user icon
+    let userIcon = "/images/default_user.png" // default user icon
 
 
     // Chat rendering
@@ -33,7 +43,7 @@ const ConversationWindow = ({ chatHistory }) => {
                     return (
                         <div className='assistantMessage' key={index}>
                         {history.content} 
-                        <img src="/images/hooded_figure_art.png" alt="user iocn" className="person_icon"/> 
+                        <img src={toonIcon} alt="user iocn" className="person_icon"/> 
                         </div >
                         
                     )
@@ -42,7 +52,7 @@ const ConversationWindow = ({ chatHistory }) => {
                  } else if (history.role == "user") {
                     return (
                         <div className='userMessage' key={index}>
-                        <img src="/images/default_user.png" alt="user iocn" className="person_icon"/> 
+                        <img src={userIcon} alt="user iocn" className="person_icon"/> 
                         {history.content}
                         </div >
                     )
