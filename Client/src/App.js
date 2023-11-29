@@ -10,19 +10,18 @@ const App = () => {
     const [chatHistory, setChatHistory] = useState([{}])
     // load chat history from backend server upon page load
     useEffect(() => {
-        getChatHistory()
-    }, [])
-
-    const getChatHistory = async () =>{
-        const serverChatHistory = await fetchChatHistory()
-        setChatHistory(serverChatHistory)
-        console.log(`Successfully fetched data from useEffect: ${chatHistory}`) // Debugging
+        const fetchData = async () => {
+        await getChatHistory() 
     }
+    fetchData()
+    }, [selectedToon])
+
+
 
     // Retrieves chat history from server
     const fetchChatHistory = async () => {
         let chatAddress;
-        console.log(selectedToon)
+        console.log("from fetchChatHistory: ", selectedToon)
         switch(selectedToon) {
             case 10: 
                 chatAddress = 'http://localhost:5000/api/chat-history/spongebob-chat'
@@ -37,22 +36,15 @@ const App = () => {
         }
         const response = await fetch(chatAddress)
         const data = await response.json()
-        console.log("Successfully retrieved fetch data: ", data) // Logging for testing purposes
         return data
     }
 
-    // Functions and states for User text submission
-    /* 
-    Plan for user submission:
-    FE: Upon button click, take user text from text area and update UI immediately 
-    FE: Send post request to backend server to update ChatHistory
+    const getChatHistory = async () =>{
+        const serverChatHistory = await fetchChatHistory()
+        setChatHistory(serverChatHistory)
+    }
 
-    BE: Backend server receives post (update) request, append user message to conversation history
-    BE: Send chatGPT API the new conversation and await response
-    BE: Backend server replies with updated chat history
 
-    FE: Update chat history with the response from the server 
-    */
 
     let userText = '' // Placeholder for user input, used for InputWindow Component
 
@@ -90,14 +82,15 @@ const App = () => {
 
     }
 
-    // People Window Code
+    // People Window Code, selecting a toon from the people panel will execute the code below
     const [selectedToon, setSeletedToon] = useState(30)
     
     const selectToon = (toon_id) => {
         console.log("clicked a div in ppl window!") // Log for DEBUGGING
-        let toonID = parseInt(toon_id)
-        setSeletedToon(toonID)
+        let toonIDInt = parseInt(toon_id)
+        setSeletedToon(toonIDInt)
         getChatHistory()
+        console.log("At the end of selectToon function: ", selectedToon) // Debugging purpose
         
     }
 

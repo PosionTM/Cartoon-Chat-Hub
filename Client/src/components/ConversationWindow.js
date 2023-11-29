@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 
-const ConversationWindow = ({ chatHistory, selectedToon }) => {
+const ConversationWindow = ({ selectedToon, chatHistory }) => {
 
 
     // Scroll down when new message appears

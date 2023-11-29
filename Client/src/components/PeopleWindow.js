@@ -17,14 +17,15 @@ const PeopleWindow = ({selectToon, selectedToon}) => {
     // highlightSelectedToon will just change the color panel of a particular selected toon
         const changeSelectedToon = (event) => {
             const clickedToon = event.target
+            selectToon(clickedToon.id)
             dehighlightSelectedToon() // returns old selected toon to original color
             highlightSelectedToon(clickedToon.id) // highlights newly selected toon
-            selectToon(clickedToon.id)
+            console.log("changeSelectedToon current id: ", clickedToon.id)
+            console.log("changeSelectedToon current id w/ selectToon id: ", selectedToon)
             
         }
 
     // Changes background color
-    // LEFT OFF HERE AT SELECTING THE QUERY
     const highlightSelectedToon = (toonID) => {
         let newToon = document.getElementById(toonID)
         newToon.style.backgroundColor = 'rgb(51, 40, 99)'
