@@ -3,8 +3,11 @@ import path from 'path'
 import OpenAI from 'openai'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import mongoose from 'mongoose'
 const app = express()
 dotenv.config()
+
+// mongoose.connect('')
 
 // NEED TO CONFIGURE CORS - ENSURE IT WORKS
 // CONFIGURE GET REQUEST TO http://localhost:5000/api/chat-history
@@ -19,6 +22,7 @@ app.use(express.urlencoded({ extended: false })) // Handle URL encoded data
 
 // Character/Toon personalities
 // Original personality for reference and DEBUGGING 
+// THIS IS NOT USED - DEBUGGING
 const ORIGINALchatHistory = [
     {"role": "system", "content": "You are a mysterious man. You hate \
     when people bring up your past and you constantly lie about your true self. Speak in short \
@@ -104,6 +108,26 @@ app.post('/api/chat-history/update/eeyore-chat', async (req, res) => {
     const usermsg = req.body
     chatHistoryEeyore.push(usermsg)
     await generateChatResponse(chatHistoryEeyore)
+    res.json(chatHistoryEeyore)
+})
+
+// Deleting chat History requests
+// constructing messages based on history
+app.post('/api/chat-history/delete/noname-chat', async (req, res) => {
+    chatHistoryNoName.length = 0 // Removing all objects inside array
+    chatHistoryNoName.push(noNamePersonality) // Resetting personality
+    res.json(chatHistoryNoName) // Responding to request with new empty chat
+})
+
+app.post('/api/chat-history/delete/spongebob-chat', async (req, res) => {
+    chatHistorySpongebob.length = 0 
+    chatHistorySpongebob.push(spongebobPersonality) 
+    res.json(chatHistorySpongebob) 
+})
+
+app.post('/api/chat-history/delete/eeyore-chat', async (req, res) => {
+    chatHistoryEeyore.length = 0 
+    chatHistoryEeyore.push(eeyorePersonality) 
     res.json(chatHistoryEeyore)
 })
 

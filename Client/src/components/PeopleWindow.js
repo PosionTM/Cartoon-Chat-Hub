@@ -17,11 +17,20 @@ const PeopleWindow = ({selectToon, selectedToon}) => {
     // highlightSelectedToon will just change the color panel of a particular selected toon
         const changeSelectedToon = (event) => {
             const clickedToon = event.target
+            event.preventDefault()
             selectToon(clickedToon.id)
             dehighlightSelectedToon() // returns old selected toon to original color
             highlightSelectedToon(clickedToon.id) // highlights newly selected toon
             console.log("changeSelectedToon current id: ", clickedToon.id)
             console.log("changeSelectedToon current id w/ selectToon id: ", selectedToon)
+
+            // preventing highlight doubleclick
+            if(document.selection && document.selection.empty) {
+                document.selection.empty();
+            } else if(window.getSelection) {
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+            }
             
         }
 

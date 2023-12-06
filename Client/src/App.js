@@ -94,6 +94,36 @@ const App = () => {
         
     }
 
+    // Delete Chat History Button Function
+    const deleteHistory = async () => {
+        console.log("delete chat button function activated")
+
+        // selecting chat to delete
+        let updateAddress;
+        switch(selectedToon) {
+            case 10: 
+                updateAddress = 'http://localhost:5000/api/chat-history/delete/spongebob-chat'
+                break
+            case 20: 
+                updateAddress = 'http://localhost:5000/api/chat-history/delete/eeyore-chat'
+                break
+            case 30: 
+                updateAddress = 'http://localhost:5000/api/chat-history/delete/noname-chat'
+                break
+                
+        }
+
+        const response = await fetch(updateAddress, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const newChat = await response.json()
+        setChatHistory(newChat)
+
+    }
+
 
     // Rendering entire app
     return (
@@ -101,7 +131,12 @@ const App = () => {
             <div className='header'>
                 <div className='burger_icon'>|||</div>
                 <div className='sub_header'>
-                    <div id='main_title'>Cartoon Chat Hub</div>
+                    <div id='main_title'>Cartoon Chat Hub </div>
+
+                    <div className='deleteButtonContainer'> 
+                    <button className="deleteButton" onClick={deleteHistory}>Delete Chat</button>
+                    </div>
+
                 </div>
             </div>
             < PeopleWindow selectToon={ selectToon } selectedToon={ selectedToon }/>
